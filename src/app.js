@@ -16,5 +16,7 @@ app.use("/api/superadmin", require("./routes/superAdminRoutes"));
 app.use("/api/hospital", require("./routes/hospitalRoutes"));
 app.use("/api/hospitaladmin", require("./routes/hospitalAdminRoutes"));
 app.use("/api/doctor", require("./routes/doctorRoutes"));
+app.use("/api/appointments", require("./routes/appointmentRoutes"));
+app.use("/api/hospitaladmin", require("./routes/hospitalAdminAppointmentRoutes"));
 
 module.exports = app;

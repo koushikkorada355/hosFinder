@@ -1,16 +1,14 @@
 const express = require("express");
 const router = express.Router();
-
 const auth = require("../middleware/auth");
 const authorize = require("../middleware/authorize");
-const { createHospital } = require("../controllers/hospitalController");
+const { createOrUpdateDoctorProfile } = require("../controllers/doctorController");
 
-
-router.post(
-  "/",
+router.put(
+  "/profile",
   auth,
-  authorize("HOSPITAL_ADMIN"),
-  createHospital
+  authorize("DOCTOR"),
+  createOrUpdateDoctorProfile
 );
 
 module.exports = router;

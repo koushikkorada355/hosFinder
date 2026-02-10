@@ -18,5 +18,9 @@ app.use("/api/hospitaladmin", require("./routes/hospitalAdminRoutes"));
 app.use("/api/doctor", require("./routes/doctorRoutes"));
 app.use("/api/appointments", require("./routes/appointmentRoutes"));
 app.use("/api/hospitaladmin", require("./routes/hospitalAdminAppointmentRoutes"));
+app.use("/api/reviews", require("./routes/reviewRoutes"));
+app.use("/api/bloodbanks", require("./routes/bloodBankRoutes"));
+app.use("/api/bloodbanks/inventory", require("./routes/bloodInventoryRoutes"));
+
 
 module.exports = app;

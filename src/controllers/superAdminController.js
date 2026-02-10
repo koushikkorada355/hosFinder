@@ -114,3 +114,64 @@ exports.createDoctor = async (req, res) => {
     });
   }
 };
+
+const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+
+/**
+ * ===============================
+ * SUPER ADMIN → CREATE BLOOD BANK ADMIN
+ * ===============================
+ */
+exports.createBloodBankAdmin = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // 1 Validate input
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email and password are required"
+      });
+    }
+
+    // 2 Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists"
+      });
+    }
+
+    // 3 Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 4 Create BLOOD_BANK_ADMIN
+    const bloodBankAdmin = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role: "BLOOD_BANK_ADMIN"
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Blood bank admin created successfully",
+      data: {
+        id: bloodBankAdmin._id,
+        name: bloodBankAdmin.name,
+        email: bloodBankAdmin.email,
+        role: bloodBankAdmin.role
+      }
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message
+    });
+  }
+};
+

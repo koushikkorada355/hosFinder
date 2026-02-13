@@ -1,25 +1,45 @@
 const mongoose = require("mongoose");
 
-const hospitalSchema = new mongoose.Schema({
-  name: String,
-  address: String,
-  location: {
-    type: {
+const hospitalSchema = new mongoose.Schema(
+  {
+    name: {
       type: String,
-      enum: ["Point"],
       required: true
     },
-    coordinates: {
-      type: [Number],
+    address: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      enum: ["PRIVATE", "GOVERNMENT"],
+      required: true
+    },
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true
+      },
+      coordinates: {
+        type: [Number], // [lng, lat]
+        required: true
+      }
+    },
+    specializations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Disease"
+      }
+    ],
+    adminUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true
     }
   },
-  adminId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true
-  }
-});
+  { timestamps: true }
+);
 
 hospitalSchema.index({ location: "2dsphere" });
 

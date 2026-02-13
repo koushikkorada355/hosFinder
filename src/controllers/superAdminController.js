@@ -115,9 +115,6 @@ exports.createDoctor = async (req, res) => {
   }
 };
 
-const User = require("../models/userModel");
-const bcrypt = require("bcryptjs");
-
 /**
  * ===============================
  * SUPER ADMIN → CREATE BLOOD BANK ADMIN

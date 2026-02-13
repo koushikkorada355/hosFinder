@@ -10,6 +10,11 @@ connectDB();
 app.use(express.json());
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Root route
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to hosFinder API", status: "Server is running" });
+});
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/superadmin", require("./routes/superAdminRoutes"));
@@ -17,10 +22,15 @@ app.use("/api/hospital", require("./routes/hospitalRoutes"));
 app.use("/api/hospitaladmin", require("./routes/hospitalAdminRoutes"));
 app.use("/api/doctor", require("./routes/doctorRoutes"));
 app.use("/api/appointments", require("./routes/appointmentRoutes"));
-app.use("/api/hospitaladmin", require("./routes/hospitalAdminAppointmentRoutes"));
+app.use("/api/hospitaladmin/admin", require("./routes/hospitalAdminAppointmentRoutes"));
 app.use("/api/reviews", require("./routes/reviewRoutes"));
 app.use("/api/bloodbanks", require("./routes/bloodBankRoutes"));
 app.use("/api/bloodbanks/inventory", require("./routes/bloodInventoryRoutes"));
+app.use("/api/diseases", require("./routes/diseaseRoutes"));
+app.use("/api/operations", require("./routes/operationRoutes"));
+app.use("/api/doctor-operations", require("./routes/doctorOperationRoutes"));
+app.use("/api/emergency", require("./routes/emergencyBookingRoutes"));
+
 
 
 module.exports = app;

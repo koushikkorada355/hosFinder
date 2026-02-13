@@ -24,7 +24,7 @@ exports.addDoctorToHospital = async (req, res) => {
     }
 
     // 3 Ensure hospital belongs to this HOSPITAL_ADMIN
-    if (hospital.adminId.toString() !== req.user.userId) {
+    if (hospital.adminUserId.toString() !== req.user.userId) {
       return res.status(403).json({
         success: false,
         message: "You are not authorized to manage this hospital"

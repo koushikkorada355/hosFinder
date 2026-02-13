@@ -5,22 +5,19 @@ const auth = require("../middleware/auth");
 const authorize = require("../middleware/authorize");
 
 const {
-  createHospital,
-  getHospitalsByDisease
-} = require("../controllers/hospitalController");
+  createDisease,
+  getDiseases
+} = require("../controllers/diseaseController");
 
-// HOSPITAL_ADMIN
+// SUPER_ADMIN
 router.post(
   "/",
   auth,
-  authorize("HOSPITAL_ADMIN"),
-  createHospital
+  authorize("SUPER_ADMIN"),
+  createDisease
 );
 
-// USER filter by disease
-router.get(
-  "/filter",
-  getHospitalsByDisease
-);
+// Public
+router.get("/", getDiseases);
 
 module.exports = router;

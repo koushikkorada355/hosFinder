@@ -4,21 +4,24 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true
+      lowercase: true,
+      // match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, "Please provide a valid email"]
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      minlength: 6
     },
     role: {
       type: String,
-      enum: ["SUPER_ADMIN", "HOSPITAL_ADMIN", "DOCTOR", "USER"],
+      enum: ["SUPER_ADMIN", "HOSPITAL_ADMIN", "DOCTOR", "USER", "BLOOD_BANK_ADMIN"],
       default: "USER"
     },
     isActive: {
